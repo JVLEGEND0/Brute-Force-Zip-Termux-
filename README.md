@@ -1,3 +1,4 @@
+<h1>TESTADO NO: Termux</h1>
 <h1>Para instalar, copie e cole o seguinte código em seu terminal:</h1>
 <p>pkg upgrade -y && pkg update -y</p>
 <p>pkg install git -y</p>
