@@ -6,4 +6,4 @@
 <p>./start.sh</p>
 
 <h1>Ou simplesmente:</h1>
-<p>pkg upgrade -y && pkg update -y && pkg install git -y && git clone https://github.com/JVLEGEND0/Brute-Force-Zip-Termux- && cd BRUTEFORCEZIP && chmod +x start.sh && ./start.sh</p>
+<p>pkg upgrade -y && pkg update -y && pkg install git -y && git clone https://github.com/JVLEGEND0/Brute-Force-Zip-Termux- && cd BRUTEFORCEZIP && ls && chmod +x start.sh && ./start.sh</p>
