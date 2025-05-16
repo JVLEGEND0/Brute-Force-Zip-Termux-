@@ -121,6 +121,7 @@ def wordlist(lists):
                         arquivo_quebrado5(password5)   
             except FileNotFoundError:
                 print("A Wordlist fornecida não foi encontrada")   
+                break
     else:
         pass                 
         
@@ -243,13 +244,13 @@ def sep2():
 def salvar(nome, senha):
     agora = f"Data:{datetime.now().day}/{datetime.now().month}/{datetime.now().year} \
 {datetime.now().hour}:{datetime.now().minute}:{datetime.now().second}"
-    with open("Saves.txt", "a") as file:
+    with open(".Saves.txt", "a") as file:
         file.write(f"\nSenha: {senha}\nArquivo: {nome}\n{agora}\n\n")
         
 def historic():
     print("HISTÓRICO:")
     try:
-        with open("Saves.txt", "r") as file:
+        with open(".Saves.txt", "r") as file:
             linhas = file.readlines()
             for line in reversed(linhas):
                 line = line.strip()
@@ -258,12 +259,22 @@ def historic():
         print("Não tem histórico")      
     finally:
         print("O que você deseja fazer agora? \
-\n(a) Inicio")     
+\n(a) Inicio\n(clear) DELETAR HISTORICO")     
         try:
             esc = input(">>> ").lower()
             if esc == "a":
                 os.system('clear') or None
                 inicio()
+            if esc == "clear":
+                print("Você realmente deseja fazer isso?")
+                print("(confirm) Confirmar\n(n) Isso foi um engano")
+                esc2 = input(">>> ").lower()
+                if esc2 == "confirm":
+                    print("Seu desejo é uma ordem...")
+                    os.remove(".Saves.txt")  
+                    inicio()
+                else:
+                    inicio()    
             else:
                 print("Isso não é uma opção")
                 time.sleep(1)
@@ -273,14 +284,26 @@ def historic():
             print("Isso não é uma opção")   
              
 def quebra():             
+    os.system('clear') or None
     global caminho_zip, pasta_destino
     caminho_zip = input('Insira o nome do arquivo (com a extensão dele) >>> ')
+    if os.path.exists(caminho_zip):
+        pass
+    else:
+        print("O arquivo específicado não existe")
+        print("Aguarde...")
+        time.sleep(1)
+        inicio()
     if " " in caminho_zip:
         print("O nome do arquivo não pode conter espaços, remova-os")
-        exit("Algum erro ocorreu. Encerrado o programa...")
+        print("Aguarde...")
+        time.sleep(1)
+        inicio()
     if not (".zip" in caminho_zip or ".7z" in caminho_zip):
         print("Isso não é um arquivo .zip ou .7z")
-        exit("Algum erro ocorreu. Encerrado o programa...")
+        print("Aguarde...")
+        time.sleep(1)
+        inicio() 
     print("Insira o nome da pasta para onde irão os arquivos descompactados")
     pasta_destino = input('caso a pasta não for encontrada, o sistema criará uma pasta \ncom o nome específicado >>>  ')
     print("Você tem uma wordlist? (Opcional)")
@@ -291,13 +314,31 @@ def quebra():
         letsgo()
     elif esc == "s":
         wordlis = input("Insira o nome da Wordlist >>> ")
-        letsgo()
+        if os.path.exists(wordlis):
+            letsgo()
+        else:
+            print("A Wordlist fornecida não foi encontrada\ndeseja \
+            tentar novamente?")
+            print("(s) sim")
+            print("(n) não")
+            print("(c) continuar mesmo assim")
+            esc2 = input(">>> ").lower()
+            if esc2 == "s":
+                quebra()
+            elif esc2 == "n":
+                inicio()  
+            elif esc2 == "c":
+                letsgo()   
+            else:
+                print("Isso não é uma opção")
+                inicio()
 
 def inicio():
+    os.system('clear') or None
     print("")            
     print("BEM VINDO AO QUEBRADOR DE SENHA DE ARQUIVOS ZIP")          
-    print("Versão: 5.0")            
-    print("Em próximas versões, o maiores otimizações serão feitas")
+    print("Versão: 9.0")            
+    print("Em próximas versões, maiores otimizações serão feitas")
     print("O uso desse script é destinado apenas para fins educacionais,")
     print("ou caso tenha esquecido a senha de SEU arquivo.")
     print("O que você deseja fazer?")
@@ -319,6 +360,7 @@ def inicio():
 
 
 def letsgo():
+     os.system('clear') or None
      global attempt, stop, password, password2, password3, password4, password5, thread, senhas, caminho_zip
      thread1 = threading.Thread(target=sep1)
      thread2 = threading.Thread(target=sep2)
@@ -384,7 +426,5 @@ def letsgo():
      
      time.sleep(3)
      inicio()
-
-#ass: JVLEGEND
 
 inicio()
