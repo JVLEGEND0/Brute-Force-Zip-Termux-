@@ -7,4 +7,4 @@ pip install pyzipper
 
 echo "Dependencias instaladas com sucesso"
 echo "Basta executar o arquivo com:"
-echo  "python3 BRUTEFORCEZIP5.py"
+echo  "python3 BRUTEFORCEZIP9.py"
